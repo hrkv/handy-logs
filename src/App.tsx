@@ -28,7 +28,7 @@ function App() {
 
             <div className="app">
                 <h1 className="header">
-                    structure logs
+                    handy logs
                 </h1>
 
                 <div className="container">

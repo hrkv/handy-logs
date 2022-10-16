@@ -1,0 +1,22 @@
+.wrapper {
+    width: 100%;
+    overflow: auto;
+}
+
+.table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.table tr:nth-child(2n) {
+    background-color: #eeeeee;
+}
+
+.cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #eee;
+    padding: 8px 12px;
+    white-space: nowrap;
+}

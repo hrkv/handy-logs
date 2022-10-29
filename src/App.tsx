@@ -1,26 +1,35 @@
-import React, {FormEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useCallback, useState} from 'react';
 
 import {NGINX_PARSER_OPTIONS} from "./constants/parserOptions";
 
 import {parseString} from "./utilities/parseString";
 
-import Table from "./components/Table/Table";
+import {Table} from "./components/Table/Table";
+import {DownloadTable} from "./components/DownloadTable/DownloadTable";
 
 import './App.css';
 
 function App() {
     const [rows, setRows] = useState<string[][] | null>(null);
 
-    const handleFormSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-        const formData = new FormData(e.target as HTMLFormElement);
-        const inputData = formData.get('logs') as string;
+    const handleFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
 
-        setRows(inputData
-            ? inputData.split('\n').map(row => parseString(row, NGINX_PARSER_OPTIONS))
-            : null
-        );
-        e.preventDefault();
-    }, [setRows]);
+        if (!file) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+            setRows(reader.result
+                ? (reader.result as string).split('\n').map(row => parseString(row, NGINX_PARSER_OPTIONS))
+                : null
+            );
+        });
+
+        reader.readAsText(file);
+    }, []);
 
     return (
         <>
@@ -31,26 +40,20 @@ function App() {
                     handy logs
                 </h1>
 
-                <div className="container">
-                    <form
-                        className="form"
-                        onSubmit={handleFormSubmit}
-                    >
-                        <textarea
-                            className="textarea"
-                            name="logs"
-                            placeholder="paste logs"
-                            rows={8}
+                <div className="toolbar">
+                    <label className="inputField">
+                        <input
+                            className="fileInput"
+                            type="file"
+                            onChange={handleFileChange}
                         />
+                        Выбрать файл
+                    </label>
 
-                        <button
-                            className="submit"
-                            type="submit"
-                        >
-                            ~ parse
-                        </button>
-                    </form>
+                    <DownloadTable rows={rows} />
+                </div>
 
+                <div className="container">
                     <Table rows={rows} />
                 </div>
             </div>

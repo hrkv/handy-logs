@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: inherit;
     font-size: inherit;
+    color: inherit;
 }
 
 .app {
@@ -9,11 +10,13 @@
     padding: 12px 24px;
     font-family: Ubuntu Mono, serif;
     font-size: 15px;
+    color: #333;
 }
 
 .header {
     font-family: Major Mono Display, serif;
     font-size: 36px;
+    margin-bottom: 40px;
 }
 
 .container {
@@ -22,41 +25,20 @@
     overflow: hidden;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
+.toolbar {
+    margin-bottom: 20px;
 }
 
-.textarea {
-    width: 100%;
-    resize: none;
-    background-color: #333;
-    color: #eee;
-
-    padding: 12px 16px;
-
-    outline: none;
-
-    border: none;
-    border-bottom: 1px #bbb solid;
-}
-
-.submit {
-    font-size: 18px;
-    padding: 8px 12px;
-    border: none;
-    background-color: #333;
-    color: #eee;
-    border-bottom: 1px #bbb solid;
+.inputField {
     cursor: pointer;
-    text-align: left;
+    display: inline-block;
+    margin-right: 12px;
 }
 
-.submit::after {
-    content: '>>';
-    padding-left: 5px;
+.inputField:hover {
+    color: #000;
 }
 
-.submit:hover::after {
-    padding-left: 10px;
+.fileInput {
+    display: none;
 }

@@ -6,7 +6,7 @@ interface ITableProps {
     rows: string[][] | null;
 }
 
-const Table: React.FC<ITableProps> = props => {
+export const Table: React.FC<ITableProps> = props => {
     const {rows} = props;
 
     if (!rows) {
@@ -31,5 +31,3 @@ const Table: React.FC<ITableProps> = props => {
         </div>
     );
 };
-
-export default Table;
